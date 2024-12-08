@@ -10,6 +10,7 @@ using Common.ExceptionType.CustomException;
 using Domain.Entities.TeacherEntities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Services.Concrete.Admin.AdminTeacherRequestService;
 
@@ -47,9 +48,10 @@ public class TeacherRequestAdminService : ServiceBase<TeacherRequestAdminService
 
     public Task<bool> AcceptRequest(int requestId)
     {
+        _logger.LogInformation("tets");
         var request =
             _teacherRequestService.DeferredWhere(x => x.Status == TeacherRequestStatusEnum.New && x.Id == requestId)
-                .FirstOrDefault() ?? throw new NotFoundException();
+                .FirstOrDefault() ?? throw new ErrorException();
 
         request.Status = TeacherRequestStatusEnum.Approved;
 
