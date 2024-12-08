@@ -49,7 +49,7 @@ public class TeacherRequestAdminService : ServiceBase<TeacherRequestAdminService
     {
         var request =
             _teacherRequestService.DeferredWhere(x => x.Status == TeacherRequestStatusEnum.New && x.Id == requestId)
-                .FirstOrDefault() ?? throw new NotFoundException();
+                .FirstOrDefault() ?? throw new NotImplementedException();
 
         request.Status = TeacherRequestStatusEnum.Approved;
 
